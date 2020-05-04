@@ -1,0 +1,4 @@
+io.dropwizard.logging.ConsoleAppenderFactory
+io.dropwizard.logging.FileAppenderFactory
+io.dropwizard.logging.SyslogAppenderFactory
+com.example.google_trace_example.logger.ConsoleJsonAppenderFactory

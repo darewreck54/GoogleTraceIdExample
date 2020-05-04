@@ -1,0 +1,43 @@
+template: Hello, %s!
+
+defaultName: defaultName
+environment: DEV
+googleProjectId: "projectId"
+
+# Logging settings.
+logging:
+
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+  level: INFO
+
+  # Logger-specific levels.
+  loggers:
+
+    # Sets the level for 'com.example.app' to DEBUG.
+    com.example.google_trace_example: DEBUG
+    # Swagger gives a bunch of warning right now.  So ignore it
+    org.reflections.Reflections: ERROR
+
+  # Appenders
+  appenders:
+    - type: console
+      timeZone: UTC
+      logFormat: "%-6level [%d{HH:mm:ss.SSS}] [%t] %logger{5} - %X{code} %msg %n"
+    - type: cloud-stackdriver
+      timeZone: UTC
+      threshold: DEBUG
+
+
+# use the simple server factory if you only want to run on a single port
+server:
+  applicationConnectors:
+    - type: http
+      port: 8080
+  adminConnectors:
+    - type: http
+      port: 8081
+
+# the only required property is resourcePackage, for more config options see below
+swagger:
+  resourcePackage: com.example.google_trace_example.resources
+  enabled: true

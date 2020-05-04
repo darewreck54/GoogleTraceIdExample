@@ -1,0 +1,64 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id 'java'
+}
+
+group 'google_trace_example'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'application'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
+    maven {
+        url "https://oss.sonatype.org/content/repositories/snapshots/"
+    }
+    mavenCentral()
+}
+
+def slf4jVersion = "1.7.29"
+
+dependencies {
+
+    compile group: 'org.slf4j', name: 'slf4j-api', version: slf4jVersion
+    compile group: 'org.slf4j', name: 'log4j-over-slf4j', version: slf4jVersion
+    compile group: 'org.slf4j', name: 'jcl-over-slf4j', version: slf4jVersion
+
+    compile group: 'com.google.cloud', name: 'google-cloud-logging', version:'1.101.0'
+    compile group: 'com.google.cloud', name: 'google-cloud-logging-logback', version: '0.117.0-alpha'
+
+    compile group: 'io.dropwizard', name: 'dropwizard-core', version: '2.0.8'
+    compile group: 'com.smoketurner', name: 'dropwizard-swagger', version: '2.0.0-1'
+    compile group: 'io.swagger.core.v3', name: 'swagger-core', version: '2.1.2'
+    compile group: 'ru.vyarus', name: 'dropwizard-guicey', version: '5.0.1'
+
+    compile group: 'com.google.inject', name: 'guice', version: '4.2.3'
+    compile group: 'org.glassfish.hk2', name: 'guice-bridge', version: '2.6.1'
+
+    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-joda', version: '2.10.3'
+    compile group: 'ch.qos.logback.contrib', name: 'logback-jackson', version: '0.1.5'
+    compile group: 'ch.qos.logback.contrib', name: 'logback-json-classic', version: '0.1.5'
+
+    compileOnly 'org.projectlombok:lombok:1.18.8'
+    annotationProcessor 'org.projectlombok:lombok:1.18.8'
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+mainClassName = 'com.snapchat.machamp.temporal_ctrl.TemporalCtrlApplication'
+
+shadowJar {
+    zip64 true
+    mergeServiceFiles()
+    exclude 'META-INF/*.DSA', 'META-INF/*.RSA', 'META-INF/*.SF'
+    manifest {
+        attributes 'Created-By': 'Gradle ' + gradle.gradleVersion
+        attributes 'Main-Class': mainClassName
+    }
+}
