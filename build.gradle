@@ -30,8 +30,8 @@ dependencies {
     compile group: 'org.slf4j', name: 'log4j-over-slf4j', version: slf4jVersion
     compile group: 'org.slf4j', name: 'jcl-over-slf4j', version: slf4jVersion
 
-    compile group: 'com.google.cloud', name: 'google-cloud-logging', version:'1.101.0'
-    compile group: 'com.google.cloud', name: 'google-cloud-logging-logback', version: '0.117.0-alpha'
+    compile group: 'com.google.cloud', name: 'google-cloud-logging', version:'2.0.1'
+    compile group: 'com.google.cloud', name: 'google-cloud-logging-logback', version: '0.119.0-alpha'
 
     compile group: 'io.dropwizard', name: 'dropwizard-core', version: '2.0.8'
     compile group: 'com.smoketurner', name: 'dropwizard-swagger', version: '2.0.0-1'
